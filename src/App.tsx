@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useRef } from "react";
+
+import Pdf from "react-to-pdf";
+import Data from "./component/Data";
 
 function App() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    console.log("ref", ref);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Pdf targetRef={ref} filename="code-example.pdf">
+        {({ toPdf }: any) => <button onClick={toPdf}>Generate Pdf</button>}
+      </Pdf>
+
+      {/* <div ref={ref}>teste</div> */}
+
+      <Data ref={ref} />
     </div>
   );
 }
